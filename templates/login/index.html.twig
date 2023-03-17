@@ -14,18 +14,18 @@ box-shadow: #6c757d">
     <form action="{{ path('app_login') }}" method="post">
         <div class="form-outline mb-4"  >
             <label style="color:white" class="form-label" for="username">Username:</label>
-            <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}">
+            <input  class="form-control" type="text" id="username" name="_username" value="{{ last_username }}">
         </div>
         <div class="form-outline mb-4">
             <label style="color:white" class="form-label" for="password">Password:</label>
-            <input class="form-control" type="password" id="password" name="_password">
+            <input class="form-control" type="password" id="password" name="_password"  >
         </div>
 
        <div class="text-center" style="color:white" >
             <p>Not a member? <a href="/register">Register</a></p>
        </div>
 
-        <input type="hidden" name="_target_path" value="/base.html.twig">
+        <input type="hidden" name="_target_path" value="/">
 
         <button class="btn-primary" style="border-radius: 5px; cursor:pointer" type="submit">Login</button>
 

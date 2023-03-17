@@ -4,18 +4,32 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use Symfony\{Bundle\FrameworkBundle\Controller\AbstractController,
+    Component\HttpFoundation\Response,
+    Component\PasswordHasher\Hasher\UserPasswordHasherInterface,
+    Component\Routing\Annotation\Route,
+    Component\Security\Http\Authentication\AuthenticationUtils};
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
-class RegistrationController extends AbstractController
-
-
+class AuthController extends AbstractController
 {
+    #[Route('/login', name: 'app_login')]
+    public function index(AuthenticationUtils $authenticationUtils): Response
+    {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('login/index.html.twig', [
+            'controller_name' => 'LoginController',
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ]);
+    }
+
     #[Route('/', name: "main")]
     public function main(): Response
     {
